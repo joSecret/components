@@ -1,12 +1,12 @@
-# Button
+## Button
 
 Use Bootstrap’s custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
 
-## Bootstrap Documentation
+### Bootstrap Documentation
 
 https://getbootstrap.com/docs/5.3/components/buttons/
 
-## Available Properties:
+### Available Properties:
 
 - `button_html_tag`: The HTML tag to use for the button (button | a). Defaults to `button`.
 - `url`: URL link for the button when the HTML tag is an anchor link.
@@ -20,11 +20,11 @@ https://getbootstrap.com/docs/5.3/components/buttons/
 - `disabled`: (true|false) Disabled button
 - `button_utility_classes`: An array of utility classes.
 
-## Available Slots:
+### Available Slots:
 
 - `content`: The content for the button
 
-## Examples
+### Examples
 
 **Example #1:** Primary button
 
