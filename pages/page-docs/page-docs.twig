@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Template for the main page.
+ */
+#}
+{% set page_style  = (style != '') ? ['page-style_' ~ style] : [] %}
+
+{% set page_attributes = attributes ?: create_attribute() %}
+
+{% set
+  page_classes = [
+    'page-docs',
+  ]|merge(page_style)|merge(page_uc ?: [])
+%}
+
+<div {{ page_attributes.addClass(page_classes) }}>
+  <section class="p_branding">
+    <div>btn</div>
+    {% block page_branding %}
+      {{- page.branding -}}
+    {% endblock %}
+    <div>btn</div>
+  </section>
+
+  <section class="p_header">
+    {% block page_header %}
+      {{ page.header }}
+    {% endblock %}
+  </section>
+
+  <section class="p_sidebar">
+    {% block page_sidebar %}
+      {{ page.nav_additional }}
+      {{ page.nav_main }}
+    {% endblock %}
+  </section>
+
+
+  <section class="p_content">
+    {% block page_content %}
+      {{ page.content }}
+    {% endblock %}
+  </section>
+</div>

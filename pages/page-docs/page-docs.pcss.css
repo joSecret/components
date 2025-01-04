@@ -1,0 +1,68 @@
+.page-docs {
+  --_pd_sidebar_w: var(--pd_sidebar_w, 260px);
+
+  min-height: 100dvh;
+  min-height: calc(100vh - var(--drupal-displace-offset-top, 0px));
+  min-height: calc(100dvh - var(--drupal-displace-offset-top, 0px));
+
+  & > main {
+    flex-grow: 1;
+  }
+
+  display: grid;
+  grid-template-columns: var(--_pd_sidebar_w) 1fr;
+  grid-template-rows: auto auto 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    'branding header'
+    'branding content'
+    'sidebar content';
+
+  .p_branding,
+  .p_sidebar,
+  .p_header,
+  .p_content {
+    padding: 20px;
+  }
+
+  .p_branding {
+    grid-area: branding;
+  }
+
+  .p_sidebar {
+    grid-area: sidebar;
+  }
+
+  .p_header {
+    grid-area: header;
+  }
+
+  .p_content {
+    grid-area: content;
+  }
+}
+
+.page-style_bordered {
+  .p_branding {
+    border-block-end: 1px solid var(--bc);
+    border-inline-end: 1px solid var(--bc);
+  }
+
+  .p_sidebar {
+    border-inline-end: 1px solid var(--bc);
+  }
+}
+
+.page-style_cell {
+  background-color: red;
+  gap: 8px;
+  padding: 8px;
+
+  .p_branding,
+  .p_sidebar,
+  .p_header,
+  .p_content {
+    background-color: white;
+    border-radius: var(--br);
+  }
+}

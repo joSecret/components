@@ -1,13 +1,13 @@
 :root {
   --_btn-py: var(--btn-py, 0.375rem);
   --_btn-px: var(--btn-px, 0.75rem);
-  --_btn-c: var(--btn-c, var(--body_c));
+  --_btn-c: var(--btn-c, var(--body-c));
   --_btn-bg: var(--btn-bg, transparent);
-  --_btn-outline-bg: var(--btn-outline-bg, var(--body_bg));
   --_btn-bw: var(--btn-bw, var(--bw));
-  --_btn-bc: var(--btn-bc, transparent);
+  --_btn-bc: var(--btn-bc, var(--_btn-bg));
   --_btn-br: var(--btn-br, var(--br));
-  --btn-tt: 0.15s;
+  --_btn-tt: var(--btn-tt, 0.15s);
+  --_btn-outline-bg: var(--btn-outline-bg, var(--body-bg));
 }
 
 .btn {

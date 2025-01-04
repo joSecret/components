@@ -15,17 +15,19 @@
   * - card_image_src: (optional) Card image source.
   * - card_image_alt: (optional) Card image alt text.
   * - card_image_cap: (optional) Card image caption.
+  * - card_image_overlays: (optional) Card image overlays.
   * - card_body_tag: (optional) Card body tag.
   * - card_title_tag: (optional) Card title tag.
   * - card_subtitle_tag: (optional) Card subtitle tag.
   * - card_text_tag: (optional) Card text tag.
   * - card_border: (optional) Card border.
-  * - attributes: (optional) Any additional classes to add to the card.
   * - card_utility_classes: (optional) Any additional classes to add to the card.
   * - card_title_prefix: (optional) Corresponds to title_prefix in entity templates.
   * - card_title_suffix: (optional) Corresponds to title_suffix in entity templates.
  */
 #}
+{% apply spaceless %}
+
 {%
   set card_title_classes = [
     'card-title'
@@ -58,13 +60,11 @@
 %}
 {%
   set card_link_classes = [
-    'card-link',
-    'stretched-link',
+    'card-link'
   ]|merge(card_link_utility_classes ?: [])
 %}
 
-{# {% set card_border = card_border ? [] : ['border-0'] %} #}
-{% set card_tag = card_tag|default('div') %}
+{% set card_border = card_border ? [] : ['border-0'] %}
 {% set card_title_tag = card_title_tag|default('h3') %}
 {% set card_body_tag = card_body_tag|default('div') %}
 {% set card_text_tag = card_text_tag|default('div') %}
@@ -73,10 +73,10 @@
 {%
   set card_classes = [
     'card',
-  ]|merge(card_utility_classes ?: [])|merge(card_border ?: [])
+  ]|merge(card_utility_classes ?: [])|merge(card_border)
 %}
 
-{% set attributes = attributes ?: create_attribute() %}
+{% set card_attributes = create_attribute() %}
 {% set card_body_attributes = create_attribute() %}
 {% set card_text_attributes = create_attribute() %}
 {% set card_title_attributes = create_attribute() %}
@@ -97,89 +97,103 @@
   ]
 %}
 
-{% set cardImg %}
-  {% if card_media|render %}
-    {{ card_media }}
-  {% elseif card_image_src %}
+<div {{ card_attributes.addClass(card_classes) }}>
+  {% if card_header %}
+    <div {{ card_header_attributes.addClass(card_header_classes) }}>
+      {{ card_header }}
+    </div>
+  {% endif %}
+
+  {% if card_image_overlays %}
     {%
       include 'versatile:image' with {
         src: card_image_src,
-        image_utility_classes: card_image_classes
+        image_utility_classes: card_image_classes|merge(['card-img'])
       }
     %}
+    {%
+      set card_body_classes = [
+        'card-img-overlay'
+      ]
+    %}
   {% endif %}
-{% endset %}
 
-{% apply spaceless %}
-<{{ card_tag }} {{ attributes.addClass(card_classes) }}>
-  {% block slot_card %}
-    {% if card_header %}
-      <div {{ card_header_attributes.addClass(card_header_classes) }}>
-        {{ card_header }}
+  {% block slot_card_image_top %}
+    {% if card_image_cap == 'top' and not card_image_overlays %}
+      {% if card_media|render %}
+        {{ card_media }}
+      {% elseif card_image_src %}
+        {%
+          include 'versatile:image' with {
+            src: card_image_src,
+            image_utility_classes: card_image_classes
+          }
+        %}
+      {% endif %}
+    {% endif %}
+  {% endblock %}
+
+  <{{card_body_tag}} {{ card_body_attributes.addClass(card_body_classes) }}>
+    {% block slot_card_body %}
+      {{ card_title_prefix }}
+      {% if card_title %}
+        {%
+          include 'versatile:heading' with {
+            heading_html_tag: card_title_tag,
+            content: card_title,
+            heading_attributes: card_title_attributes,
+            heading_utility_classes: card_title_classes
+          }
+        %}
+      {% endif %}
+      {{ card_title_suffix }}
+
+      {% if card_subtitle %}
+        <{{card_subtitle_tag}} {{ card_subtitle_attributes.addClass(card_subtitle_classes) }}>{{ card_subtitle }}</{{card_subtitle_tag}}>
+      {% endif %}
+
+      {% if card_body %}
+        <{{card_text_tag}} {{ card_text_attributes.addClass(card_text_classes) }}>
+          {{ card_body }}
+        </{{card_text_tag}}>
+      {% endif %}
+
+      {% if card_link_url %}
+        {%
+          include 'versatile:button' with {
+            button_utility_classes: card_link_classes,
+            content: card_link_text,
+            url: card_link_url,
+            button_html_tag: button_html_tag ? button_html_tag : (card_link_url ? 'a' : 'button'),
+          }
+        %}
+      {% endif %}
+    {% endblock %}
+    {% block slot_card_links %}{% endblock %}
+  </{{card_body_tag}}>
+
+  {% block slot_card_image_bottom %}
+    {% if card_image_cap == 'bottom' and not card_image_overlays %}
+      {% if card_media %}
+        {{ card_media }}
+      {% elseif card_image_src %}
+        {%
+          include 'versatile:image' with {
+            src: card_image_src,
+            image_utility_classes: card_image_classes|merge(['card-img-bottom'])
+          }
+        %}
+      {% endif %}
+    {% endif %}
+  {% endblock %}
+
+  {% block slot_card_footer %}
+    {% if card_footer %}
+      <div {{ card_footer_attributes.addClass(card_footer_classes) }}>
+        {{ card_footer }}
       </div>
     {% endif %}
-
-    {% block slot_card_image_top %}
-      {% if card_image_cap == 'top' %}
-        {{ cardImg }}
-      {% endif %}
-    {% endblock %}
-
-    <{{card_body_tag}} {{ card_body_attributes.addClass(card_body_classes) }}>
-      {% block slot_card_body %}
-        {{ card_title_prefix }}
-
-        {% if card_title %}
-          {%
-            include 'edwt:heading' with {
-              heading_html_tag: card_title_tag,
-              content: card_title,
-              heading_attributes: card_title_attributes,
-              heading_utility_classes: card_title_classes
-            }
-          %}
-        {% endif %}
-
-        {{ card_title_suffix }}
-
-        {% if card_subtitle %}
-          <{{card_subtitle_tag}} {{ card_subtitle_attributes.addClass(card_subtitle_classes) }}>{{ card_subtitle }}</{{card_subtitle_tag}}>
-        {% endif %}
-
-        {% if card_body %}
-          <{{card_text_tag}} {{ card_text_attributes.addClass(card_text_classes) }}>
-            {{ card_body }}
-          </{{card_text_tag}}>
-        {% endif %}
-
-        {% if card_link_url %}
-          {%
-            include 'edwt:button' with {
-              button_utility_classes: card_link_classes,
-              content: card_link_text,
-              url: card_link_url,
-              button_html_tag: button_html_tag ? button_html_tag : (card_link_url ? 'a' : 'button'),
-            }
-          %}
-        {% endif %}
-      {% endblock %}
-
-      {% block slot_card_links %}{% endblock %}
-    </{{card_body_tag}}>
-
-    {% block slot_card_image_bottom %}
-      {% if card_image_cap == 'bottom' %}
-        {{ cardImg }}
-      {% endif %}
-    {% endblock %}
-
-    {% block slot_card_footer %}
-      {% if card_footer %}
-        <div {{ card_footer_attributes.addClass(card_footer_classes) }}>
-          {{ card_footer }}
-        </div>
-      {% endif %}
-    {% endblock %}
   {% endblock %}
-</{{ card_tag }}>
+</div>
+
 {% endapply %}

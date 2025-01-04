@@ -44,7 +44,7 @@ add extra Bootstrap utility classes or custom classes to this component.
 
 ```twig
 {%
-  include 'radix:heading' with {
+  include 'versatile:heading' with {
     heading_html_tag: 'h1',
     content: title|render|striptags|trim,
     heading_attributes: title_attributes,
@@ -59,7 +59,7 @@ add extra Bootstrap utility classes or custom classes to this component.
 
 ```twig
 {%
-  include 'radix:heading' with {
+  include 'versatile:heading' with {
     heading_html_tag: heading_tag,
     content: heading_text|render|striptags|trim,
   }
@@ -70,7 +70,7 @@ add extra Bootstrap utility classes or custom classes to this component.
 
 ```twig
 {%
-  embed "radix:heading" with {
+  embed "versatile:heading" with {
     heading_attributes: title_attributes,
     content: label,
     heading_html_tag: 'h2'
@@ -83,7 +83,7 @@ add extra Bootstrap utility classes or custom classes to this component.
 
 ```twig
 {%
-  include "radix:heading" with {
+  include "versatile:heading" with {
     heading_attributes: your_custom_heading_attributes,
     heading_html_tag: 'h2',
     content: heading,
@@ -96,7 +96,7 @@ add extra Bootstrap utility classes or custom classes to this component.
 
 ```twig
 {%
-  include 'radix:heading' with {
+  include 'versatile:heading' with {
     heading_html_tag: 'h3',
     title_link: url,
     content: label,
