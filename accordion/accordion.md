@@ -10,6 +10,29 @@ The accordion component is a simple way to show and hide content. Build vertical
 
 The Accordion component takes a variety of properties to customize its appearance and content:
 
+Available properties:
+
+- accordion_id (int) (default: accordion-random(1000))
+- title (string) (default: '')
+- title_tag (string) (default: 'h2')
+- flush (boolean) (default: false)
+- open_item_id (int) (default: 0)
+- icon_position (none|left|right) (default: rigth)
+- items (array) (default: []): format: [
+  {
+  title: (string),
+  title_tag: (string),
+  content: (block),
+  },
+  ]
+
+- accordion_uc (array) (default: '')
+- accordion_item_uc (array) (default: '')
+
+- accordion_att (Drupal\Core\Template\Attribute)
+- title_att (drupal attrs) (Drupal\Core\Template\Attribute)
+- accordion_item_att (Drupal\Core\Template\Attribute)
+
 `title` : The title of the accordion.
 `title_tag` : The HTML tag to use for the title. Default is `h2`.
 `title_link` : A link to wrap the title in.

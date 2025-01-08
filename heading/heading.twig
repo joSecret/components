@@ -35,15 +35,15 @@
 
 {% if content %}
   <{{heading_html_tag}} {{ heading_attributes.addClass(heading_classes) }}>
-    {% block heading_content %}
-      {% if title_link %}
+    {%- block heading_content -%}
+      {%- if title_link -%}
         <a {{ heading_link_attributes.addClass(heading_link_classes) }}>
-          {{ content }}
+          {{- content -}}
         </a>
-      {% else %}
-        {{ content }}
-      {% endif %}
-    {% endblock %}
+      {%- else -%}
+        {{- content -}}
+      {%- endif -%}
+    {%- endblock -%}
   </{{heading_html_tag}}>
 {% endif %}
 
