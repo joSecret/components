@@ -1,3 +1,10 @@
+---
+title: 'Accordion'
+machine_name: accordion
+version: '1.0'
+date: '2023-10-01'
+---
+
 ## Accordion
 
 The accordion component is a simple way to show and hide content. Build vertically collapsing accordions in combination with our Collapse JavaScript plugin.
