@@ -5,6 +5,16 @@ description: Customizable block component for displaying various types of conten
 props:
   type: object
   properties:
+    type:
+      type: string
+      title: Block type
+      description: The type of the block.
+      enum:
+        - ''
+        - 'clear'
+        - 'card'
+      default: ''
+
     id:
       type: string
       title: ID
@@ -83,13 +93,16 @@ props:
         type: string
       title: Content Utility Classes
       description: 'An array of utility classes to be added to the block content area.'
+
 slots:
   block_label:
     title: Label Slot
     description: Slot for the block label.
+
   block_content:
     title: Content Slot
     description: Slot for the block content.
+
   content:
     title: Default Content
     description: Default content for Block.

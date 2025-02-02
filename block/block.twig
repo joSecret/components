@@ -4,6 +4,7 @@
  * Template for a Block component.
  *
  * Available variables:
+ * - type: String that will determine the type of the block.
  * - layout: String that will determine the layout of the block.
  * - plugin_id: The ID of the block implementation.
  * - label: The configured label of the block if visible.
@@ -30,8 +31,6 @@
  * @ingroup themeable
  */
 #}
-{% apply spaceless %}
-
 {% set block_attributes = attributes ?: create_attribute() %}
 {% set block_html_tag = block_html_tag ?? 'div' %}
 
@@ -52,35 +51,37 @@
   ]|merge(block_content_utility_classes ?: [])
 %}
 
-{% if block_html_tag %}
-  <{{block_html_tag}} {{ block_attributes|without('id').addClass(block_classes) }}>
-  {% endif %}
-
-  {{ title_prefix }}
-  {% block block_label %}
-    {% if label %}
-      {%
-        include 'versatile:heading' with {
-          heading_attributes: title_attributes,
-          content: label,
-          heading_html_tag: heading_html_tag|default('h2'),
-          heading_utility_classes: heading_utility_classes|default(['block__title']),
-        }
-      %}
-    {% endif %}
-  {% endblock %}
-  {{ title_suffix }}
-
-  {% block block_content %}
-    {% if content %}
-      <div{{content_attributes.addClass(block_content_classes)}}>
-        {{ content }}
-      </div>
-    {% endif %}
-  {% endblock %}
-
+{% if type == 'clear' %}
+  {{ content }}
+{% else %}
   {% if block_html_tag %}
-  </{{block_html_tag}}>
-{% endif %}
+    <{{block_html_tag}} {{ block_attributes|without('id').addClass(block_classes) }}>
+    {% endif %}
 
-{% endapply %}
+    {{ title_prefix }}
+    {% block block_label %}
+      {% if label %}
+        {%
+          include 'versatile:heading' with {
+            heading_attributes: title_attributes,
+            content: label,
+            heading_html_tag: heading_html_tag|default('h2'),
+            heading_utility_classes: heading_utility_classes|default(['block__title']),
+          }
+        %}
+      {% endif %}
+    {% endblock %}
+    {{ title_suffix }}
+
+    {% block block_content %}
+      {% if content %}
+        <div{{content_attributes.addClass(block_content_classes)}}>
+          {{ content }}
+        </div>
+      {% endif %}
+    {% endblock %}
+
+    {% if block_html_tag %}
+    </{{block_html_tag}}>
+  {% endif %}
+{% endif %}
