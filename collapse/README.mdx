@@ -9,7 +9,7 @@ Toggle the visibility of content across your project with a few classes and our 
 ## Component Properties
 
 - `title`: (string) The text displayed on the collapse trigger button. It is the label for the collapsible content.
-- `button_html_tag` (optional): (string) Specifies the HTML tag to be used for the collapse trigger. It can be either `button` or `a` (anchor). Defaults to button.
+- `button_tag` (optional): (string) Specifies the HTML tag to be used for the collapse trigger. It can be either `button` or `a` (anchor). Defaults to button.
 - `id` (optional): (integer) A unique identifier for the collapse component. This is important for accessibility and JavaScript functionality.
 - `direction` (optional): (string) The direction in which the content will collapse. Can be `vertical` or `horizontal`. Defaults to `vertical`.
 - `collapsed` (optional): (boolean) Indicates whether the collapsible content is initially collapsed. Defaults to true, meaning the content starts in a collapsed state.
@@ -23,7 +23,7 @@ Toggle the visibility of content across your project with a few classes and our 
   {%
     include 'versatile:collapse' with {
       title: 'Read More About This Topic',
-      button_html_tag: 'button',
+      button_tag: 'button',
       id: '123',
       direction: 'vertical',
       content: 'This is detailed content about the topic, which can be text, images, or other Drupal blocks.'
@@ -37,7 +37,7 @@ Toggle the visibility of content across your project with a few classes and our 
 {%
   embed 'versatile:collapse' with {
     title: 'Show the card!',
-    button_html_tag: 'button',
+    button_tag: 'button',
     id: 'collapse-card',
   }
 %}

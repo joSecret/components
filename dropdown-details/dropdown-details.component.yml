@@ -5,7 +5,16 @@ description: Toggle contextual overlays for displaying lists of links and more w
 props:
   type: object
   properties:
-    items:
+    # properties
+    # Dropdown properties
+    type:
+      type: string
+      description: Dropdown type.
+      enum:
+        - div
+        - menu
+
+    menu_items:
       type: array
       title: Menu Items
       items:
@@ -29,18 +38,42 @@ props:
           in_active_trail:
             type: boolean
             title: Is item in active trail
-    dropdown_button_content:
+
+    # Button/summary properties
+    button_color:
       type: string
-      title: Dropdown button content
+      description: Dropdown summary button color
+
+    # values
+    # Button/summary values
+    button_label:
+      type: string
+      description: Dropdown summary button label
+
+    # uc -> utility_classes
+    dropdown_button_uc:
+      type: array
+      items:
+        type: string
+        title: Dropdown button utility classes
+
+    dropdown_uc:
+      type: array
+      items:
+        type: string
+        title: Dropdown utility classes
+
+    # att -> attributes
     dropdown_button_att:
       type: Drupal\Core\Template\Attribute
-    dropdown_button_tag:
+
+    dropdown_tag:
       type: string
       title: The HTML tag to use for the button (button | a). Defaults to `button`.
-      default: button
+      default: div
       enum:
-        - button
-        - a
+        - ul
+        - div
     dropdown_button_url:
       type: string
       title: Dropdown button URL
@@ -59,26 +92,7 @@ props:
       title: Split button
       description: Split button
       default: false
-    dropdown_utility_classes:
-      type: array
-      items:
-        type: string
-        title: Dropdown utility classes
-    dropdown_item_utility_classes:
-      type: array
-      items:
-        type: string
-        title: Dropdown item utility classes
-    dropdown_button_uc:
-      type: array
-      items:
-        type: string
-        title: Dropdown button utility classes
-    dropdown_menu_utility_classes:
-      type: array
-      items:
-        type: string
-        title: Dropdown menu utility classes
+
     dropdown_color:
       type: string
       title: Color
@@ -109,10 +123,12 @@ props:
       type: Drupal\Core\Template\Attribute
     dropdown_menu_attributes:
       type: Drupal\Core\Template\Attribute
+
 slots:
-  dropdown_toggler:
+  slot_content:
     type: string
-    title: Dropdown toggler
-  dropdown_menu:
+    title: Dropdown slot content
+
+  slot_button:
     type: string
-    title: Dropdown menu
+    title: Dropdown button

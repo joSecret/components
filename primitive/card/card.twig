@@ -161,10 +161,10 @@
       {% if card_link_url %}
         {%
           include 'versatile:button' with {
-            button_utility_classes: card_link_classes,
+            button_uc: card_link_classes,
             content: card_link_text,
             url: card_link_url,
-            button_html_tag: button_html_tag ? button_html_tag : (card_link_url ? 'a' : 'button'),
+            button_tag: button_tag ? button_tag : (card_link_url ? 'a' : 'button'),
           }
         %}
       {% endif %}

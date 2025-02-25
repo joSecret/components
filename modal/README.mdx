@@ -27,7 +27,7 @@ https://getbootstrap.com/docs/5.3/components/modal/
 - `modal_header_attributes`: A list of HTML attributes for the modal header.
 - `modal_title_attributes`: A list of HTML attributes for the modal title.
 - `modal_body_attributes`: A list of HTML attributes for the modal body.
-- `close_button_attributes`: A list of HTML attributes for the close button.
+- `close_button_att`: A list of HTML attributes for the close button.
 - `modal_utility_classes`: An array of utility classes for additional styling.
 - `modal_dialog_utility_classes`: An array of utility classes for additional styling on the modal dialog.
 - `modal_header_utility_classes`: An array of utility classes for additional styling on the modal header.
@@ -70,7 +70,7 @@ https://getbootstrap.com/docs/5.3/components/modal/
     'py-4',
     'px-lg-9',
   ],
-  close_button_utility_classes: [
+  close_button_uc: [
     'rounded-5',
     'bg-gray',
     'p-2',
@@ -90,8 +90,8 @@ https://getbootstrap.com/docs/5.3/components/modal/
   outline: true,
   id: 'modal-login--trigger',
   content: 'Button text',
-  button_attributes: create_attribute().setAttribute('data-bs-toggle', 'modal').setAttribute('data-bs-target', '#modal-login'),
-  button_utility_classes: [
+  button_att: create_attribute().setAttribute('data-bs-toggle', 'modal').setAttribute('data-bs-target', '#modal-login'),
+  button_uc: [
     'mb-2',
     'mb-md-0',
     'btn-outline-white',

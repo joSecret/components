@@ -9,7 +9,7 @@
  * - offcanvas_title_attributes: (optional) Offcanvas title attributes.
  * - offcanvas_title_utility_classes: (optional) Offcanvas title utility classes.
  * - offcanvas_button_content: (optional) Offcanvas button content.
- * - offcanvas_button_attributes: (optional) Offcanvas button attributes.
+ * - offcanvas_button_att: (optional) Offcanvas button attributes.
  * - offcanvas_utility_classes: (optional) Offcanvas utility classes.
  * - offcanvas_header_utility_classes: (optional) Offcanvas header utility classes.
  * - offcanvas_body_utility_classes: (optional) Offcanvas body utility classes.
@@ -47,7 +47,7 @@
 %}
 
 {%
-  set offcanvas_button_attributes = create_attribute()
+  set offcanvas_button_att = create_attribute()
     .setAttribute('type', 'button')
     .setAttribute('data-bs-toggle', 'offcanvas')
     .setAttribute('data-bs-target', '#' ~ offcanvas_id)
@@ -87,7 +87,7 @@
   {%
     include 'versatile:button' with {
       content: offcanvas_button_content,
-      button_attributes: offcanvas_button_attributes,
+      button_att: offcanvas_button_att,
     }
   %}
 {% endblock %}
@@ -110,7 +110,7 @@
         {% if close_button %}
           {%
             include 'versatile:close-button' with {
-              close_button_attributes: create_attribute()
+              close_button_att: create_attribute()
                 .setAttribute('data-bs-dismiss', 'offcanvas')
             }
           %}

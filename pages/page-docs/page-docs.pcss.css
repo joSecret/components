@@ -22,7 +22,9 @@
   .p_sidebar,
   .p_header,
   .p_content {
-    padding: 20px;
+    &:not(:empty) {
+      padding: 20px;
+    }
   }
 
   .p_branding {

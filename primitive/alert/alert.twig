@@ -39,7 +39,7 @@
   {% if dismissible %}
     {%
       include 'versatile:close-button' with {
-        close_button_attributes: create_attribute()
+        close_button_att: create_attribute()
           .setAttribute('data-bs-dismiss', 'alert')
       }
     %}

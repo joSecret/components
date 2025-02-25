@@ -127,7 +127,7 @@
 
             {% if close_button %}
               {% include 'versatile:close-button' with {
-                close_button_attributes: close_button_attributes ?: create_attribute().setAttribute('data-bs-dismiss', 'modal')
+                close_button_att: close_button_att ?: create_attribute().setAttribute('data-bs-dismiss', 'modal')
               } %}
             {% endif %}
           {% endblock %}

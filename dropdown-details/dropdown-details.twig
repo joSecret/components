@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Template for a Drodown component.
+ *
+ * Available config:
+ */
+#}
+
+
+<details class="dropdown">
+  {% include 'versatile:button' with {
+    button_tag: 'summary',
+    color: button_color,
+    content: button_label,
+  } %}
+
+  <ul class="dropdown--content is-menu">
+    {% for item in menu_items %}
+      <li>
+      {% if item.url %}
+          {% include 'versatile:button' with {
+            content: item.title,
+            url: item.url|render,
+          } %}
+      {% else %}
+          {% include 'versatile:button' with {
+            content: item.title,
+          } %}
+      {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</details>

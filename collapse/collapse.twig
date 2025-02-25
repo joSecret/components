@@ -8,7 +8,7 @@
   *
   * Available properties:
   * - title (string) (default: '')
-  * - button_html_tag (string) (default: 'button')
+  * - button_tag (string) (default: 'button')
   * - id (int) (default: random(1000))
   * - collapsed (boolean) (default: true)
   * - direction: (string) (default: 'vertical')
@@ -35,23 +35,23 @@
 
 <div class="collapse-container">
   {%
-    set button_attributes = create_attribute()
+    set button_att = create_attribute()
       .setAttribute('data-bs-toggle', 'collapse')
       .setAttribute('aria-expanded', collapsed ? 'false' : 'true')
       .setAttribute('aria-controls', 'collapse-' ~ id)
   %}
 
-  {% if button_html_tag == 'a' %}
-    {% set button_attributes = button_attributes.setAttribute('href', url ?? '') %}
+  {% if button_tag == 'a' %}
+    {% set button_att = button_att.setAttribute('href', url ?? '') %}
   {% else %}
-    {% set button_attributes = button_attributes.setAttribute('data-bs-target', '#collapse-' ~ id) %}
+    {% set button_att = button_att.setAttribute('data-bs-target', '#collapse-' ~ id) %}
   {% endif %}
 
   {% block collapse_trigger %}
     {%
       include 'versatile:button' with {
         content: title,
-        button_html_tag: button_html_tag,
+        button_tag: button_tag,
       }
     %}
   {% endblock %}

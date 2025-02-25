@@ -8,7 +8,7 @@ https://getbootstrap.com/docs/5.3/components/buttons/
 
 ## Available Properties:
 
-- `button_html_tag`: The HTML tag to use for the button (button | a). Defaults to `button`.
+- `button_tag`: The HTML tag to use for the button (button | a). Defaults to `button`.
 - `url`: URL link for the button when the HTML tag is an anchor link.
 - `color`: Bootstrap includes several predefined button styles, each serving its own
   semantic purpose, with a few extras thrown in for more control.
@@ -18,7 +18,7 @@ https://getbootstrap.com/docs/5.3/components/buttons/
   background images and colors on any button.
 - `size`: (btn-sm | btn-lg) Bootstrap button size
 - `disabled`: (true|false) Disabled button
-- `button_utility_classes`: An array of utility classes.
+- `button_uc`: An array of utility classes.
 
 ## Available Slots:
 
@@ -31,7 +31,7 @@ https://getbootstrap.com/docs/5.3/components/buttons/
 ```twig
   {%
     include 'edwt:button' with {
-      button_html_tag: 'button',
+      button_tag: 'button',
       color: 'primary',
       content: 'Login'
     }
@@ -43,22 +43,22 @@ https://getbootstrap.com/docs/5.3/components/buttons/
 ```twig
  {%
   include 'edwt:button' with {
-      button_html_tag: 'a',
+      button_tag: 'a',
       color: 'primary',
       outline: true,
       content: 'Read more',
       url: '/blog/test-blog1',
-      button_utility_classes: ['card-link', 'float-end', 'mt-3', 'read-more']
+      button_uc: ['card-link', 'float-end', 'mt-3', 'read-more']
     }
   %}
 ```
 
 **Example #3:** Disabled Anchor button
 
-``` twig
+```twig
   {%
     include 'edwt:button' with {
-      button_html_tag: 'a',
+      button_tag: 'a',
       color: 'primary',
       content: 'Read more',
       url: '#',

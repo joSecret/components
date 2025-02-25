@@ -12,15 +12,9 @@
   --_accordion_bw: var(--accordion_bw, var(--bw, 1px));
   --_accordion_bc: var(--accordion_bc, var(--bc, #dee2e6));
   --_accordion_icon_s: var(--accordion_icon_s, 16px);
-  --_accordion_summary_c: var(--accordion_summary_c, var(--link_c-default));
-  --_accordion_summary_c_h: var(
-    --accordion_summary_c_h,
-    var(--link_c_h-default)
-  );
-  --_accordion_summary_c_a: var(
-    --accordion_summary_c_a,
-    var(--link_c_a-default)
-  );
+  --_accordion_summary_c: var(--accordion_summary_c, var(--def--link_c));
+  --_accordion_summary_c_h: var(--accordion_summary_c_h, var(--def--link_c_h));
+  --_accordion_summary_c_a: var(--accordion_summary_c_a, var(--def--link_c_a));
   --_accordion-summary_pb: var(--accordion-summary_pb, 12px);
   --_accordion-summary_pi: var(--accordion-summary_pi, 20px);
   --_accordion-summary_bg: var(
@@ -63,7 +57,7 @@
     align-items: center;
 
     &::marker {
-      content: "";
+      content: '';
     }
 
     &:hover {

@@ -82,7 +82,7 @@
             {% if toast.with_close %}
               {% include
             'versatile:close-button' with {
-              close_button_attributes: create_attribute()
+              close_button_att: create_attribute()
                 .setAttribute('data-bs-dismiss', 'toast'),
             }
           %}
@@ -106,8 +106,8 @@
                   attributes: button.attributes|default(create_attribute()),
                   color: button.color|default('primary'),
                   outline: button.outline|default(false),
-                  button_utility_classes: button.button_utility_classes|default([]),
-                  button_html_tag: button.button_html_tag|default('button'),
+                  button_uc: button.button_uc|default([]),
+                  button_tag: button.button_tag|default('button'),
                   url: button.url|default(''),
                 }
               %}

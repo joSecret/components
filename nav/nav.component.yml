@@ -17,6 +17,7 @@ props:
         - right
         - center
         - vertical
+
     style:
       type: string
       name: Style
@@ -26,6 +27,7 @@ props:
         - ''
         - tabs
         - pills
+
     fill:
       type: string
       name: Fill
@@ -37,6 +39,13 @@ props:
         - justify
 
     # fields values
+    nav_items:
+      type: array
+      name: 'Items links'
+      items:
+        type: string
+      description: 'nav items'
+
     # uc -> utility_classes
     nav_uc:
       type: array
@@ -60,10 +69,10 @@ props:
       description: "Additional utility classes that can be added to the nav link component. These classes should be defined in your theme's CSS."
 
     # att -> attributes
-    attributes:
+    nav_att:
       type: Drupal\Core\Template\Attribute
 
 slots:
-  nav_items:
+  slot_items:
     name: Nav Items
     description: Navigation items.

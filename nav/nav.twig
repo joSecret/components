@@ -7,28 +7,32 @@
  * - alignment: left | right | center | vertical.
  * - style: tabs | pills
  * - fill: fill | justify
- * - dropdown_direction: dropstart | dropend
- * - nav_uc: An array of utility classes.
- * - nav_link_uc: An array of utility classes.
+ *
+ * Availabel Utility classes -> uc
+ * - nav_uc: (array) (default: '')
+ *
+ * Availabel attributes -> att
+ * - nav_att (Drupal\Core\Template\Attribute)
+ * - nav_item_uc (Drupal\Core\Template\Attribute)
+ * - nav_link_uc (Drupal\Core\Template\Attribute)
+ *
+ * Availabel slots
+ * - slot_items: The items
  */
 #}
-{% apply spaceless %}
 
-{% import _self as menus %}
-{%
-  set alignment_classes = {
-    'right': 'justify-content-end',
-    'center': 'justify-content-center',
-    'vertical': 'flex-column',
-    'left': ''
-  }
-%}
-
-{% set alignment = alignment_classes[alignment] ?? '' %}
-{% set dropdown_direction = dropdown_direction ?? 'dropend' %}
+{# Set default value #}
+{% set alignment = alignment|default('') %}
 {% set style = style ? 'nav-' ~ style : '' %}
 {% set fill = fill ? 'nav-' ~ fill : '' %}
 
+
+{% import _self as menus %}
+
+{# Create attributres #}
+{% set nav_att = nav_att ?: create_attribute() %}
+
+{# Component classes #}
 {%
   set nav_classes = [
     'nav',
@@ -38,8 +42,17 @@
   ]|merge(nav_uc ?: [])
 %}
 
+{%
+  set alignment_classes = {
+    'right' in alignment ? 'justify-content-end' : '',
+    'center' in alignment ? 'justify-content-center' : '',
+    'vertical' in alignment ? 'flex-column' : '',
+  }
+%}
+
+{# Render component #}
 {% if items %}
-  <ul {{ attributes.addClass(nav_classes) }}>
+  <ul{{ nav_att.addClass(nav_classes, accordion_classes) }}>
     {% block nav_items %}
       {% for item in items %}
         {%
@@ -85,5 +98,3 @@
     {% endblock %}
   </ul>
 {% endif %}
-
-{% endapply %}

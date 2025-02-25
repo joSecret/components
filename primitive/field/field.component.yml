@@ -10,7 +10,7 @@ props:
       title: Label display
       description: Display the label of the field.
 
-    field_utility_classes:
+    field_uc:
       type: array
       items:
         type: string
@@ -18,7 +18,7 @@ props:
       default: []
       description: An array of utility classes. Use to add extra Bootstrap utility classes or custom CSS classes over to this component.
 
-    field_title_utility_classes:
+    field_title_uc:
       type: array
       items:
         type: string

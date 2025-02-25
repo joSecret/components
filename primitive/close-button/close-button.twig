@@ -13,13 +13,13 @@
  * - size: btn-sm | btn-lg
  * - disabled: true | false
  * - attributes: Attributes array.
- * - close_button_utility_classes: An array of utility classes.
+ * - close_button_uc: An array of utility classes.
  */
 #}
 
 {% apply spaceless %}
 
-{% set close_button_attributes = close_button_attributes ?: create_attribute() %}
+{% set close_button_att = close_button_att ?: create_attribute() %}
 {% set size = size ? [size] : [] %}
 {% set disabled = disabled ? ['disabled'] : [] %}
 
@@ -27,9 +27,9 @@
   set close_button_classes = [
     'btn',
     'btn-close',
-  ]|merge(close_button_utility_classes ?: [])|merge(size)|merge(disabled)
+  ]|merge(close_button_uc ?: [])|merge(size)|merge(disabled)
 %}
 
-<button type="button" {{ close_button_attributes.addClass(close_button_classes) }} {{ disabled }} aria-label="{{ 'Close'|trans }}"></button>
+<button type="button" {{ close_button_att.addClass(close_button_classes) }} {{ disabled }} aria-label="{{ 'Close'|trans }}"></button>
 
 {% endapply %}
