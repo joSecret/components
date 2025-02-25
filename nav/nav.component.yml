@@ -17,6 +17,8 @@ props:
         - right
         - center
         - vertical
+      example:
+        - responsive
 
     style:
       type: string
@@ -61,15 +63,11 @@ props:
         type: string
       description: "Additional utility classes that can be added to the nav item component. These classes should be defined in your theme's CSS."
 
-    nav_link_uc:
-      type: array
-      name: Link Utility Classes
-      items:
-        type: string
-      description: "Additional utility classes that can be added to the nav link component. These classes should be defined in your theme's CSS."
-
     # att -> attributes
     nav_att:
+      type: Drupal\Core\Template\Attribute
+
+    nav_item_att:
       type: Drupal\Core\Template\Attribute
 
 slots:

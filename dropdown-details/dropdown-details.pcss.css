@@ -1,37 +1,54 @@
-:where(.dropdown) {
-  --_dropdown_z-i: var(--dropdown_z-i, var(--z-dropdown, 1));
-  --_dropdown-content_bg: var(--dropdown-content_bg, var(--body_bg, #fff));
-  --_dropdown-content_mbs: var(--dropdown-content_mbs, 0.5em);
-  --_dropdown-content_pb: var(--dropdown-content_pb, 0.5em);
-  --_dropdown-content_pi: var(--dropdown-content_pb, 0.5em);
-  --_dropdown-content_min-w: var(--dropdown-content_min-w, 100%);
-  --_dropdown-content_max-w: var(--dropdown-content_max-w, 200%);
+@layer component {
+  :where(.dropdown) {
+    --_dropdown_w: var(--dropdown_w, auto);
+    --_dropdown_z-i: var(--dropdown_z-i, var(--z-dropdown, 1));
+    --_dropdown-content_pos: initial;
+    --_dropdown-content_bg: var(--dropdown-content_bg, var(--body_bg, #fff));
+    --_dropdown-content_mbs: var(--dropdown-content_mbs, 0.5em);
+    --_dropdown-content_pb: var(--dropdown-content_pb, 0.5em);
+    --_dropdown-content_pi: var(--dropdown-content_pb, 0.5em);
+    --_dropdown-content_min-w: var(--dropdown-content_min-w, 100%);
+    --_dropdown-content_max-w: var(--dropdown-content_max-w, 200%);
+    --_dropdown-content_bs: var(
+      --dropdown-content_bs,
+      0 1px 3px 0 #0000001a,
+      0 1px 2px -1px #0000001a
+    );
 
-  isolation: isolate;
-  position: relative;
-  display: inline-block;
-  z-index: var(--_dropdown_z-i);
+    isolation: isolate;
+    position: relative;
+    display: inline-block;
+    z-index: var(--_dropdown_z-i);
+    width: var(--_dropdown_w);
 
-  .dropdown--content {
-    width: max-content;
-    min-width: var(--_dropdown-content_min-w);
-    max-width: var(--_dropdown-content_max-w);
-    background: var(--_dropdown-content_bg);
-    padding-block: var(--_dropdown-content_pb);
-    padding-inline: var(--_dropdown-content_pi);
-    margin-top: var(--_dropdown-content_mbs);
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    border-radius: var(--br);
-    position: absolute;
-    z-index: 1;
+    .dropdown--content {
+      width: max-content;
+      min-width: var(--_dropdown-content_min-w);
+      max-width: var(--_dropdown-content_max-w);
+      background: var(--_dropdown-content_bg);
+      padding-block: var(--_dropdown-content_pb);
+      padding-inline: var(--_dropdown-content_pi);
+      margin-top: var(--_dropdown-content_mbs);
+      position: var(--dropdown-content_pos, var(--_dropdown-content_pos));
+      border-radius: var(--br);
+      box-shadow: ;
+      z-index: 1;
 
-    &.is-menu {
-      list-style: none;
+      &.is-menu {
+        list-style: none;
+      }
+
+      &.dd--level-0 {
+        --_dropdown-content_pos: absolute;
+      }
     }
-  }
 
-  .btn {
-    width: 100%;
-    text-align: left;
+    &.dropdown-resposive {
+    }
+
+    .btn {
+      width: 100%;
+      text-align: left;
+    }
   }
 }

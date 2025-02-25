@@ -6,13 +6,26 @@ props:
   type: object
   properties:
     # properties
-    # Dropdown properties
     type:
       type: string
       description: Dropdown type.
+      default: 'menu'
       enum:
         - div
         - menu
+
+    content_position:
+      type: string
+      description: Dropdown content position.
+      default: ''
+      enum:
+        - ''
+        - absolute
+        - resposive
+
+    content:
+      type: object,
+      title: Content,
 
     menu_items:
       type: array

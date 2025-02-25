@@ -10,11 +10,11 @@
  *
  * Availabel Utility classes -> uc
  * - nav_uc: (array) (default: '')
+ * - nav_item_uc: (array) (default: '')
  *
  * Availabel attributes -> att
  * - nav_att (Drupal\Core\Template\Attribute)
- * - nav_item_uc (Drupal\Core\Template\Attribute)
- * - nav_link_uc (Drupal\Core\Template\Attribute)
+ * - nav_item_att (Drupal\Core\Template\Attribute)
  *
  * Availabel slots
  * - slot_items: The items
@@ -22,12 +22,9 @@
 #}
 
 {# Set default value #}
-{% set alignment = alignment|default('') %}
+{% set alignment = alignment ? 'nav-' ~ alignment : '' %}
 {% set style = style ? 'nav-' ~ style : '' %}
 {% set fill = fill ? 'nav-' ~ fill : '' %}
-
-
-{% import _self as menus %}
 
 {# Create attributres #}
 {% set nav_att = nav_att ?: create_attribute() %}
@@ -42,18 +39,42 @@
   ]|merge(nav_uc ?: [])
 %}
 
-{%
+{# {%
   set alignment_classes = {
     'right' in alignment ? 'justify-content-end' : '',
     'center' in alignment ? 'justify-content-center' : '',
     'vertical' in alignment ? 'flex-column' : '',
   }
-%}
+%} #}
+
+{% if items %}
+  <ul{{ nav_att.addClass(nav_classes) }}>
+    {% block slot_items %}
+      {% for item in items %}
+        <li{{ item.attributes }}>
+          {% if item.below %}
+            {% include 'versatile:dropdown-details' with {
+              button_label: item.title,
+              menu_items: item.below,
+            } %}
+          {% else %}
+            {% include 'versatile:button' with {
+              color: 'primary',
+              url: item.url|render is not empty ? item.url|render : null,
+              content: item.title,
+            } %}
+          {% endif %}
+        </li>
+      {% endfor %}
+    {% endblock %}
+  </ul>
+{% endif %}
 
 {# Render component #}
-{% if items %}
+
+
+{# {% if items %}
   <ul{{ nav_att.addClass(nav_classes, accordion_classes) }}>
-    {% block nav_items %}
       {% for item in items %}
         {%
           set nav_item_classes = [
@@ -95,6 +116,5 @@
           {% endif %}
         </li>
       {% endfor %}
-    {% endblock %}
   </ul>
-{% endif %}
+{% endif %} #}

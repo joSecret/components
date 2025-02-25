@@ -1,6 +1,7 @@
-@layer nav {
-  .nav {
+@layer component {
+  :where(.nav) {
     --_nav_mb: var(--nav-mb, 0px);
+    --_nav_d: var(--_nav_d, row);
 
     --link_c: var(--nav-link_c, var(--_nav-link_c));
     --link_c_h: var(
@@ -15,13 +16,19 @@
     --_nav-link_pb: var(--nav-link_pb, var(--nav-link_pb-default));
     --_nav-link-fw: var(--nav-link-fw, var(--nav-link-fw-default));
 
-    /* --nav-link-disabled-color: var(--c-primary); */
+    --ul-mb: var(--_nav_mb);
+    --ul-ps: 0px;
 
     display: flex;
     flex-wrap: wrap;
-    padding-left: 0;
-    margin-block: 0px;
+    flex-direction: var(--_nav_d);
     list-style: none;
+
+    &.nav-vertical {
+      --_nav_d: column;
+      --dropdown_w: 100%;
+      --dropdown-content_pos: relative;
+    }
 
     &.nav-tabs {
       --nav-link_c: var(
