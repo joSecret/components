@@ -4,6 +4,7 @@ status: stable
 props:
   type: object
   properties:
+    # properties
     grid:
       type: boolean
       title: Brid
@@ -27,6 +28,14 @@ props:
         - 'pcss'
       default: 'right'
 
+    hide_tab:
+      type: string
+      title: Hide tab
+      example:
+        - 'preview'
+        - 'code'
+
+    # values
     # uc -> utility_classes
     code_tabs_uc:
       type: array

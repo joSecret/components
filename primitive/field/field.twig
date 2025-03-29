@@ -39,7 +39,8 @@
  * @see template_preprocess_field()
  */
 #}
-{% apply spaceless %}
+
+
 
 {%
   set field_classes = [
@@ -59,37 +60,41 @@
   ]|merge(field_title_uc ?: [])
 %}
 
-{% if label_hidden %}
-  {% if multiple %}
-    <div {{ attributes.addClass(field_classes) }}>
+{%- if clear -%}
+  {%- for item in items -%}
+    {{- item.content -}}
+  {%- endfor -%}
+{%- else -%}
+  {% if label_hidden %}
+    {% if multiple %}
+      <div {{ attributes.addClass(field_classes) }}>
+        {% for item in items %}
+          <div {{ item.attributes.addClass('field__item') }}>
+            {{- item.content -}}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
       {% for item in items %}
-        <div {{ item.attributes.addClass('field__item') }}>
+        <div {{ attributes.addClass(field_classes) }}>
           {{- item.content -}}
         </div>
       {% endfor %}
-    </div>
-  {% else %}
-    {% for item in items %}
-      <div {{ attributes.addClass(field_classes) }}>
-        {{- item.content -}}
-      </div>
-    {% endfor %}
-  {% endif %}
-{% else %}
-  <div {{ attributes.addClass(field_classes) }}>
-    <div {{ title_attributes.addClass(field_title_classes) }}>{{ label }}</div>
-    {% if multiple %}
-      <div class="field__items">
-      {% endif %}
-
-      {% for item in items %}
-        <div {{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
-      {% endfor %}
-
-      {% if multiple %}
-      </div>
     {% endif %}
-  </div>
-{% endif %}
+  {% else %}
+    <div {{ attributes.addClass(field_classes) }}>
+      <div {{ title_attributes.addClass(field_title_classes) }}>{{ label }}</div>
+      {% if multiple %}
+        <div class="field__items">
+        {% endif %}
 
-{% endapply %}
+        {% for item in items %}
+          <div {{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
+        {% endfor %}
+
+        {% if multiple %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+{%- endif -%}

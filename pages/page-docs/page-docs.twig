@@ -15,13 +15,11 @@
 %}
 
 <div {{ page_attributes.addClass(page_classes) }}>
-  <section class="p_branding">
-    <div>btn</div>
-    {% block page_branding %}
-      {{- page.branding -}}
-    {% endblock %}
-    <div>btn</div>
-  </section>
+  {% block slot_branding %}
+  {% endblock %}
+  <header class='pb-mob pd--header'>
+    {{- page.branding -}}
+  </header>
 
   <section class="p_header">
     {% block page_header %}

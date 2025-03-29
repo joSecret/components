@@ -1,7 +1,11 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json
-name: Page
+name: Page layout docs
+version: 1.0.0
+group: Layout
 status: experimental
-description: 'The main page component that gives the structural outline for every page.'
+description: 'A responsive documentation page layout with sidebar navigation and content area.'
+
+# Props.
 props:
   type: object
   properties:
@@ -15,20 +19,23 @@ props:
         - bordered
         - cell
 
+    # uc -> utility_classes
     page_uc:
       type: array
       items:
         type: string
-      description: 'Additional utility classes added to the page component.'
+      description: 'Additional utility classes added to the page layout docs component.'
 
-    page_attributes:
+    # att -> attributes
+    page_att:
       type: Drupal\Core\Template\Attribute
-      description: 'HTML attributes for the page component.'
+      description: 'HTML attributes for the page layout docs component.'
 
+# Slots.
 slots:
-  page_branding:
+  slot_branding:
     title: Page Branding
-    description: 'The branding section of the page.'
+    description: 'The branding section/region of the page.'
 
   page_header:
     title: Page Header

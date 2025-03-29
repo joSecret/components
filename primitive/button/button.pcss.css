@@ -1,6 +1,6 @@
 @layer default {
   :is(.btn, .btn-outline) {
-    --def--btn_c-text: #1f2937;
+    --def--btn_c-text: var(--body-c, #1f2937);
     --def--btn-c-text_r: #fff;
     --def--btn_c-bg: transparent;
     --def--btn_c-bc: var(--def--btn_c-bg);
@@ -183,7 +183,7 @@
 
   .btn-secondary {
     --def--btn_c-text: var(--def--btn-c-text_r);
-    --def--btn_c-bg: var(--c-gray);
+    --def--btn_c-bg: var(--c-secondary);
   }
 
   .btn-success {

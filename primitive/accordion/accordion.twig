@@ -34,7 +34,7 @@
 #}
 
 {# Set default value #}
-{% set accordion_id = 'accordion-' ~ accordion_id ?: random(1000) %}
+{% set accordion_id = 'accordion-' ~ accordion_id ? accordion_id : random(1000) %}
 {% set title = title|default('') %}
 {% set title_tag = title_tag|default('h2') %}
 {% set items = items|default([]) %}
@@ -65,58 +65,56 @@
 {% set accordion_att = accordion_att.setAttribute('id', accordion_id) %}
 
 {# Render component #}
-{% apply spaceless %}
-  {% if items is not empty %}
-    {%- if title is not empty -%}
-      {%-
-        include 'versatile:heading' with {
-          heading_html_tag: 'h2',
-          content: title,
-          heading_attributes: title_att,
-        }
-      -%}
-    {%- endif -%}
 
-    <div{{ accordion_att.addClass(accordion_classes) }}>
-      {% for item in items %}
-        {% set content = item.content|default('') %}
+{% if items is not empty %}
+{%- if title is not empty -%}
+  {%-
+    include 'versatile:heading' with {
+      heading_html_tag: 'h2',
+      content: title,
+      heading_attributes: title_att,
+    }
+  -%}
+{%- endif -%}
 
-        {% if content %}
-          <details {{ accordion_item_att.addClass(accordion_item_classes) }} {{ loop.index == open_item_id ? 'open' }} {{ stay_open ? '' : 'name=' ~ accordion_id }}>
-            <summary>
-              {% if icon_position != 'left' %}
-                <span>
-                  {{ item.title }}
-                </span>
-              {% endif %}
+<div{{ accordion_att.addClass(accordion_classes) }}>
+{%- for item in items -%}
+{%- set content = item.content|default('') -%}
+{%- if content -%}
+  <details {{ accordion_item_att.addClass(accordion_item_classes) }} {{ loop.index == open_item_id ? 'open' }} {{ stay_open ? '' : 'name=' ~ accordion_id }}>
+    <summary>
+      {% if icon_position != 'left' %}
+      <span>
+        {{- item.title -}}
+      </span>
+      {% endif %}
 
-              {% if icon_position != 'none' %}
-                <div class="accordion-icon">
-                  {%- block icon -%}
-                    <?xml version="1.0" encoding="utf-8"?>
-                    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                    <svg width="800px" height="800px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <path d="M16.354 5.075l-7.855 7.854-7.853-7.854 0.707-0.707 7.145 7.146 7.148-7.147 0.708 0.708z" fill="currentColor" />
-                    </svg>
-                  {%- endblock -%}
-                </div>
-              {% endif %}
+      {% if icon_position != 'none' %}
+      <div class="accordion-icon">
+        {% block icon %}
+          <?xml version="1.0" encoding="utf-8"?>
+          <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+          <svg width="800px" height="800px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M16.354 5.075l-7.855 7.854-7.853-7.854 0.707-0.707 7.145 7.146 7.148-7.147 0.708 0.708z" fill="currentColor" />
+          </svg>
+        {% endblock %}
+      </div>
+      {% endif %}
 
-              {% if icon_position == 'left' %}
-                <span>
-                  {{ item.title }}
-                </span>
-              {% endif %}
-            </summary>
+      {% if icon_position == 'left' %}
+      <span>
+        {{- item.title -}}
+      </span>
+      {% endif %}
+    </summary>
 
-            <div class="accordion-body">
-              {%- block content -%}
-                {{- content -}}
-              {%- endblock -%}
-            </div>
-          </details>
-        {% endif %}
-      {% endfor %}
+    <div class="accordion-body">
+      {%- block content -%}
+        {{- content -}}
+      {%- endblock -%}
     </div>
-  {% endif %}
-{% endapply %}
+  </details>
+{% endif %}
+{% endfor %}
+</div>
+{% endif %}

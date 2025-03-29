@@ -23,8 +23,8 @@
     --ul-mbe: 0px;
     --ul-ps: var(--_tabs-ul_p);
 
+    width: 100%;
     list-style: none;
-    width: max-content;
     padding: var(--_tabs-ul_p);
     display: var(--_tabs-ul_d);
     gap: var(--_tabs-ul_gap);
@@ -62,12 +62,4 @@
       color: #fff;
     }
   }
-}
-
-/* Temp */
-.in-grid .field {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacer);
-  align-items: center;
 }

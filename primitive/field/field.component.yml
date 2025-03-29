@@ -5,6 +5,11 @@ description: Field container divisions with attributes.
 props:
   type: object
   properties:
+    clear:
+      type: bolean
+      title: Clear field
+      description: Clear field without div and other HTML tags.
+
     label_display:
       type: string
       title: Label display
